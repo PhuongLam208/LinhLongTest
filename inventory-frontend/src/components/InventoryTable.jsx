@@ -6,6 +6,8 @@ import { deleteItem } from "../services/api.js";
 
 function InventoryTable({ items, onReload }) {
   const navigate = useNavigate();
+  const [isDeleted, setIsDeleted] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const user = JSON.parse(localStorage.getItem("user"));
@@ -21,16 +23,29 @@ function InventoryTable({ items, onReload }) {
     setConfirmDelete(true);
   };
 
-  const confirmDeleteItem = async() => {
+  const confirmDeleteItem = async () => {
     try {
       await deleteItem(selectedItem.id);
+      setIsDeleted(true);
+      setIsSuccess(true);
+      setConfirmDelete(false);
+      setSelectedItem(null);
+      setTimeout(() => {
+        setIsDeleted(false);
+        setIsSuccess(false);
+      }, 2000)
       await onReload();
-    } catch(err) {
+    } catch (err) {
+      setIsDeleted(true);
       console.log(err);
 
+      setTimeout(() => {
+        setIsDeleted(false);
+        setConfirmDelete(false);
+        setSelectedItem(null);
+      }, 2000)
+
     }
-    setConfirmDelete(false);
-    setSelectedItem(null);
   }
 
   const cancelDelete = () => {
@@ -60,9 +75,9 @@ function InventoryTable({ items, onReload }) {
           </tr>
         </thead>
         <tbody>
-          {items.map((item,index) => (
+          {items.map((item, index) => (
             <tr key={item.id}>
-              <td>{index+1}</td>
+              <td>{index + 1}</td>
               <td>{item.name}</td>
               <td>{item.description}</td>
               <td>{item.color}</td>
@@ -107,8 +122,28 @@ function InventoryTable({ items, onReload }) {
             </div>
           </div>
         </div>
-      )
-      }
+      )}
+      {isDeleted && (
+        <div className="alert-overlay">
+          <div className="alert-box" style={{}}>
+            <p style={{
+              color: isSuccess ? "green" : "red"
+            }}>
+              Delete Item
+              {isSuccess
+                ? "Successfully"
+                : "Failed"
+              }
+            </p>
+            <div>
+              {isSuccess
+                ? <img src="../../public/success.png" alt="success" style={{ width: "5vw" }} />
+                : <img src="../../public/fail.png" alt="fail" style={{ width: "5vw" }} />
+              }
+            </div>
+          </div>
+        </div>
+      )}
     </div >
   );
 }
