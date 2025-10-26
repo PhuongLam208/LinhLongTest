@@ -1,0 +1,56 @@
+.inventory-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.inventory-form {
+  background-color: #ffffff;
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 30vw;
+}
+
+
+.form-group {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center; 
+  gap: 1vw; 
+  margin-top: 2vh;
+}
+
+
+.cancel-btn {
+  background-color: #f63b3b;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #961616;
+}
+
+.reset-btn {
+    background-color: #dc9a00;
+    color: white;
+}
+
+.reset-btn:hover{
+    background-color: #aa7700;
+}
+
+.save-btn {
+  background-color: #379f43;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #147315;
+}

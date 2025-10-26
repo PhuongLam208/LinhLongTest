@@ -1,0 +1,32 @@
+.title-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.create-btn{
+    margin: 8px 9px;
+    color: white;
+    padding: 7px 16px;
+    width: 8vw;
+    height: 5vh;
+    background-color: #1a4cb1;
+}
+
+
+.create-btn:hover{
+    background-color: #11347b;
+}
+
+.logout-btn{
+    margin: 8px 9px;
+    color: white;
+    padding: 7px 16px;
+    width: 6.5vw;
+    height: 5vh;
+    background-color: #db3647;
+}
+
+.logout-btn:hover{
+    background-color: #9a2631;
+}
